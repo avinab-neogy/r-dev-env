@@ -1,5 +1,7 @@
-# This script is run after the workspace is created
 #!/bin/bash
+
+# This script is run after the workspace is created
+
 
 local_script(){
 
@@ -12,6 +14,8 @@ DEVCONTAINER_JSON="$WORK_DIR/.devcontainer/devcontainer.json"
 PATCHDIR="$WORK_DIR/patches"
 mkdir -p $PATCHDIR
 mkdir -p $VSCODE_DIR
+
+cp $WORK_DIR/.devcontainer/launch.json $VSCODE_DIR/launch.json
 
 # Copy the which_r and set_build_r function definitions to .bashrc
 cat $WORK_DIR/scripts/which_r.sh >> ~/.bashrc

@@ -1,4 +1,5 @@
 site_name: R Devel Container Docs
+site_url: ''
 repo_name: r-devel/r-dev-env
 repo_url: https://github.com/r-devel/r-dev-env
 nav:
@@ -19,6 +20,7 @@ nav:
         - 'Running R' : 'tutorials/running_r.md'
         - 'Building R': 'tutorials/building_r.md'
         - 'R Contribution Workflow' : 'tutorials/contribution_workflow.md'
+        - 'Debugging C code with lldb': tutorials/debugging.md
         - 'Updating Source Code' : 'tutorials/update_source.md'
         - 'Creating a Patch File' : 'tutorials/patch_update.md'
         - 'Multiple R Versions' : 'tutorials/multi_r_compilation.md'

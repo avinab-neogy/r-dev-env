@@ -1,12 +1,16 @@
 {
     "name": "R-Dev-Env",
-    "image": "ghcr.io/r-devel/r-dev-env:main",
+    "image": "ghcr.io/r-devel/r-dev-env:devel",
     "hostRequirements": {
         "cpus": 4
     },
+    "runArgs": ["--cap-add=SYS_PTRACE"],
     "customizations": {
         "vscode": {
             "settings": {
+                "editor.tabSize": 8,
+                "editor.indentSize": 4,
+                "editor.detectIndentation": false,
                 "r.lsp.diagnostics": false,
                 "r.plot.useHttpgd": true,
                 "r.rpath.linux": "/usr/bin/R",
@@ -16,16 +20,19 @@
                 "workbench.editorAssociations": {
                     "*.md": "vscode.markdown.preview.editor"
                 },
-                "workbench.welcomePage.walkthroughs.openOnInstall": false
+                "workbench.welcomePage.walkthroughs.openOnInstall": false,
+                "r.libPaths": ["/usr/local/lib/R/site-library"]
             },
             "extensions": [
                 "REditorSupport.r",
                 "mads-hartmann.bash-ide-vscode",
                 "johnstoncode.svn-scm",
                 "ms-vscode.cpptools",
-                "MS-vsliveshare.vsliveshare"
+                "MS-vsliveshare.vsliveshare",
+                "natqe.reload",
+                "vadimcn.vscode-lldb"
             ]
         }
     },
-    "postCreateCommand": "chown -R vscode:vscode /workspaces/r-dev-env && sh /workspaces/r-dev-env/scripts/localscript.sh"
+    "postCreateCommand": "find . -wholename '.git*' -type d -prune -o -type f -exec chown vscode:vscode {} \\; && gcc -shared -fPIC -o /workspaces/r-dev-env/scripts/allow_ptrace.so /workspaces/r-dev-env/scripts/allow_ptrace.c && chmod +x /workspaces/r-dev-env/scripts/launch_r.sh && sh /workspaces/r-dev-env/scripts/localscript.sh"
 }
